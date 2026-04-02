@@ -128,6 +128,42 @@ body {
 }
 .nav-links a:hover { color: var(--accent-green); }
 
+/* Dropdown de Idiomas Customizado */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.lang-select {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+  backdrop-filter: blur(10px);
+  appearance: none;
+  -webkit-appearance: none;
+}
+.lang-select option {
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+}
+.lang-select:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: var(--accent-green);
+}
+
+/* Transição p/ Switcher */
+[data-i18n] {
+  transition: opacity 0.3s ease;
+}
+
 /* Hero Parallax */
 .hero {
   height: 100vh;
@@ -322,22 +358,171 @@ body {
   line-height: 1.7;
 }
 
-/* COP30 Banner / Parallax */
-.cop30.parallax-section {
+/* SWC Crypto Banner / Parallax */
+.swc-crypto.parallax-section {
   position: relative;
   padding: 8rem 0;
   display: flex;
   justify-content: center;
-  background: url('https://images.unsplash.com/photo-1511497584788-876760111969?q=80&w=2560&auto=format&fit=crop');
+  background: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?q=80&w=2000&auto=format&fit=crop'); /* Fundo ecologia escura */
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
+  perspective: 1000px;
 }
-.cop30.parallax-section::before {
+.swc-crypto.parallax-section::before {
   content: "";
   position: absolute;
   inset: 0;
   background: rgba(11, 17, 11, 0.7);
+}
+
+/* CSS Pure 3D Coin Model - Fotorrealista Físico */
+.css-coin-container {
+  width: 250px;
+  height: 250px;
+  perspective: 1200px;
+  margin: 0 auto;
+}
+
+/* Lógica de Reflexos Fotorrealistas Estacionários */
+@property --shine-angle {
+  syntax: '<angle>';
+  initial-value: 30deg;
+  inherits: false;
+}
+
+@keyframes shineCounter {
+  from { --shine-angle: 30deg; }
+  to { --shine-angle: -330deg; }
+}
+
+.css-coin-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: spinReal3D 10s linear infinite;
+}
+
+/* Sombra e Aura */
+.css-coin-container::before {
+  content: '';
+  position: absolute;
+  top: 90%; left: 15%; right: 15%; height: 15px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.5);
+  filter: blur(8px);
+  z-index: -1;
+  transform: translateZ(-30px) translateY(30px) rotateX(70deg);
+}
+
+@keyframes spinReal3D {
+  0% { transform: rotateX(25deg) rotateY(0deg); }
+  100% { transform: rotateX(25deg) rotateY(360deg); }
+}
+
+.css-coin-face, .css-coin-edge {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+/* Base de Ouro Premium Clean (Hiper-realismo Vetorial) */
+.css-coin-face {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  background: conic-gradient(from var(--shine-angle), 
+    #A27B2B 0%, #D4AF37 15%, #FFF0B3 25%, #A27B2B 40%, #5C430A 50%, 
+    #A27B2B 60%, #FFF0B3 75%, #D4AF37 85%, #A27B2B 100%);
+  animation: shineCounter 10s linear infinite; 
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.4), inset 0 0 10px rgba(92, 67, 10, 0.8);
+  border: 4px solid #F3CF55; /* Borda maciça lisa */
+  overflow: hidden;
+}
+
+/* O "anel maquinado" interno recuado Premium */
+.css-coin-inner {
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  border: 3px solid #6E4F0A; /* Corte sólido mais limpo que tracejado */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: conic-gradient(from calc(var(--shine-angle) + 90deg), 
+    #8A6511 0%, #D4AF37 25%, #FFF0B3 50%, #5C430A 75%, #8A6511 100%);
+  animation: shineCounter 10s linear infinite;
+  box-shadow: inset 0 0 15px rgba(20, 10, 0, 0.9), 0 0 3px rgba(255,255,255,0.6);
+  position: relative;
+}
+
+.css-coin-edge {
+  border: 2px solid #D4AF37; /* Ranhura em cor metálica brilhante */
+  background: conic-gradient(from 0deg, #8A6511, #D4AF37, #8A6511);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+/* Espessura no Z: 6px total (Lâmina fina super premium) */
+.css-coin-front {
+  transform: translateZ(6px);
+}
+.css-coin-back {
+  transform: rotateY(180deg) translateZ(6px);
+}
+
+/* O Símbolo estilo Bitcoin mas com 'C' (Refinamento Apple-Style Clean) */
+.css-coin-symbol {
+  position: relative;
+  font-size: 115px; 
+  font-weight: 800;
+  color: #FFF0B3; /* Ouro super brilhante limpo */
+  font-family: 'Outfit', Arial, sans-serif;
+  text-align: center;
+  z-index: 10;
+  line-height: 1;
+  /* Extrusão focada em uma única direção para solidez (Machined Block Effect) */
+  text-shadow: 
+    0px 1px 0px #B48D29,
+    0px 2px 0px #8A6511,
+    0px 3px 0px #5C430A,
+    0px 4px 6px rgba(0,0,0,0.6);
+}
+
+/* Pontas do Bitcoin (Barras verticais limpas) */
+.css-coin-symbol::before, .css-coin-symbol::after {
+  content: '';
+  position: absolute;
+  left: 35px; right: 35px; 
+  width: auto;
+  height: 20px; 
+  background: #FFF0B3;
+  box-shadow: 
+    0px 1px 0px #B48D29,
+    0px 2px 0px #8A6511,
+    0px 3px 0px #5C430A,
+    0px 4px 4px rgba(0,0,0,0.5);
+  border-radius: 1px;
+  z-index: -1;
+}
+.css-coin-symbol::before { top: -16px; border-bottom: none; } 
+.css-coin-symbol::after { bottom: -16px; border-top: none; } 
+
+/* Repondendo a classes SVG removidas acidentalmente neste bloco */
+.coin-svg-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+.neon-ring {
+  filter: drop-shadow(0 0 2px #2ecc71) drop-shadow(0 0 4px #2ecc71);
+  stroke-width: 1.5px;
 }
 
 .glass-panel {
@@ -368,11 +553,71 @@ body {
   color: var(--accent-green);
 }
 
-/* Footer */
+/* ==========================================================
+   PLANET EARTH (FOOTER 3D GFX HARMONIZADO)
+   ========================================================== */
+.earth-container {
+  width: 100%;
+  display: flex;
+  justify-content: center; /* Centraliza a terra dentro da sua própria coluna do grid */
+  align-items: center;
+  position: relative;
+  /* Margins brutas removidas para aderir graciosamente ao footer-grid */
+}
+
+.planet-earth {
+  width: 180px; /* Planeta muito menor e mais elegante (Era 450px) */
+  height: 180px;
+  border-radius: 50%;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/c/cd/Land_ocean_ice_2048.jpg') repeat-x;
+  background-size: cover; 
+  background-position: 0 0;
+  /* Sombras foram redimensionadas proporcionalmente ao novo tamanho */
+  box-shadow: 
+    inset 0 0 40px rgba(0, 0, 0, 0.95), 
+    inset -15px 5px 30px rgba(0,0,0,0.8), 
+    inset 5px -5px 15px rgba(46, 204, 113, 0.4), 
+    0 0 20px rgba(74, 144, 226, 0.4), 
+    0 0 5px rgba(255, 255, 255, 0.1);
+  animation: espheraSpin 40s linear infinite;
+  z-index: 5;
+  filter: contrast(1.1) brightness(0.9);
+}
+
+/* Base glow menor proporcional à terra de 180px */
+.earth-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(46,204,113,0.12) 0%, transparent 60%);
+  z-index: 1;
+}
+
+@keyframes espheraSpin {
+  0% { background-position: 0 0; }
+  100% { background-position: -200% 0; } /* Roda o mapa criando o laço */
+}
+
+/* Resposta Mobile: Planeta Harmonizado */
+@media screen and (max-width: 768px) {
+  .planet-earth {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* ==========================================================
+   FOOTER (Ajustes para acomodar a estrela/terra)
+   ========================================================== */
 .footer {
   background: #060906;
-  padding: 5rem 5% 2rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  padding: 3rem 5% 2rem; /* padding topo diminuído para não deixar vazio antes da terra */
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
 }
 .footer-grid {
   display: grid;
@@ -395,9 +640,50 @@ body {
 .footer ul a:hover { color: var(--accent-green); }
 
 .footer-bottom {
-  text-align: center;
   padding-top: 2rem;
   border-top: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap; /* Caso encolha muito, quebra linhas */
+  gap: 1.5rem;
+}
+
+/* Widget Embutido no Inclinado Inferior */
+.bottom-ticker {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.bottom-ticker .ticker-icon {
+  margin-right: 6px;
+  animation: pulse-tracker 2s alternate infinite ease-in-out;
+}
+.bottom-ticker .ticker-label {
+  margin-right: 8px;
+  font-size: 0.8rem;
+  color: #a3a3a3;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.bottom-ticker .ticker-value {
+  font-family: inherit;
+  font-weight: 700;
+  color: #fff;
+}
+.bottom-ticker .trend-up {
+  color: var(--accent-green);
+  margin-left: 6px;
+  font-size: 0.8rem;
+}
+
+@keyframes pulse-tracker {
+  0% { filter: drop-shadow(0 0 2px var(--accent-green)); transform: scale(0.95); }
+  100% { filter: drop-shadow(0 0 6px var(--accent-green)); transform: scale(1.05); }
 }
 
 /* Fade in Scroll Animations */
@@ -442,8 +728,9 @@ body {
   .dual-col .sobre-text h2 { font-size: 2.2rem; }
   .dual-col .sobre-text p { font-size: 1rem; }
   
-  /* Banner COP30 */
-  .cop30.parallax-section { padding: 5rem 5%; }
+  /* Banner SWC */
+  .swc-crypto.parallax-section { padding: 5rem 5%; overflow: visible; }
+  .css-coin-container { transform: scale(0.85); margin-top: 1.5rem; }
   .glass-panel { padding: 2rem 1.5rem; }
   .glass-panel h2 { font-size: 1.8rem; }
   .countdown { flex-wrap: wrap; gap: 0.8rem; }
@@ -457,4 +744,5 @@ body {
   /* Footer */
   .footer { padding: 4rem 5% 1.5rem; }
   .footer-grid { gap: 2rem; text-align: center; }
+  .footer-bottom { justify-content: center; }
 }
