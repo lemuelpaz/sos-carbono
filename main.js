@@ -251,21 +251,57 @@ const translations = {
   }
 };
 
-document.getElementById('langSwitcher').addEventListener('change', (e) => {
-  const lang = e.target.value;
-  const t = translations[lang];
-  
-  if(t) {
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (t[key]) {
-        // Usa fade de opacidade para transição suave
-        el.style.opacity = 0;
-        setTimeout(() => {
-          el.innerHTML = t[key];
-          el.style.opacity = 1;
-        }, 300);
-      }
+// Tab Switching Logic for Language
+const langTabs = document.querySelectorAll('.lang-tab');
+const langIndicator = document.querySelector('.lang-indicator');
+
+// Set initial indicator width
+if(langTabs.length > 0) {
+    langIndicator.style.width = langTabs[0].offsetWidth + 'px';
+}
+
+langTabs.forEach(tab => {
+    tab.addEventListener('click', (e) => {
+        // Remove active class from all
+        langTabs.forEach(t => t.classList.remove('active'));
+        
+        // Add active class to clicked tab
+        const clickedTab = e.target;
+        clickedTab.classList.add('active');
+        
+        // Move indicator
+        langIndicator.style.width = clickedTab.offsetWidth + 'px';
+        langIndicator.style.transform = `translateX(${clickedTab.offsetLeft - 4}px)`;
+
+        // Change Language Content
+        const lang = clickedTab.getAttribute('data-lang');
+        const t = translations[lang];
+        
+        if(t) {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    // Efeito degradê suave (blur)
+                    el.style.transition = "opacity 0.4s ease, filter 0.4s ease";
+                    el.style.opacity = 0;
+                    el.style.filter = "blur(5px)";
+                    setTimeout(() => {
+                        el.innerHTML = t[key];
+                        el.style.opacity = 1;
+                        el.style.filter = "blur(0px)";
+                    }, 400); // tempo de transição um pouco maior para absorver o degradê
+                }
+            });
+        }
     });
-  }
+});
+
+// "Transações entre abas" - Browser Tab visibility harmony
+const originalTitle = document.title;
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        document.title = "💚 Volte para a Natureza! - " + originalTitle;
+    } else {
+        document.title = originalTitle;
+    }
 });;

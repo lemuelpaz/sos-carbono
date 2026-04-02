@@ -135,28 +135,40 @@ body {
   gap: 1.5rem;
 }
 
-.lang-select {
+.lang-tabs {
+  display: flex;
+  position: relative;
   background: rgba(255,255,255,0.05);
   border: 1px solid var(--glass-border);
-  color: var(--text-primary);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  outline: none;
+  border-radius: 30px;
+  padding: 4px;
   backdrop-filter: blur(10px);
-  appearance: none;
-  -webkit-appearance: none;
 }
-.lang-select option {
-  background-color: var(--bg-color);
-  color: var(--text-primary);
+.lang-tab {
+  padding: 0.5rem 1.2rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  transition: color 0.3s ease;
+  user-select: none;
 }
-.lang-select:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: var(--accent-green);
+.lang-tab.active {
+  color: #0b110b; /* Dark text on the green indicator */
+}
+.lang-indicator {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  height: calc(100% - 8px);
+  width: 44px; /* Default width for 'PT' */
+  background: linear-gradient(90deg, var(--accent-green), #00e676);
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.4);
+  border-radius: 20px;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55), width 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 /* Transição p/ Switcher */
@@ -193,7 +205,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(11, 17, 11, 0.3) 0%, rgba(11, 17, 11, 0.9) 100%);
+  /* Fades from semi-transparent to solid background color at the bottom */
+  background: linear-gradient(to bottom, rgba(11, 17, 11, 0.3) 0%, rgba(11, 17, 11, 0.8) 70%, var(--bg-color) 100%);
   z-index: 2;
 }
 
@@ -374,7 +387,8 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(11, 17, 11, 0.7);
+  /* Degradê (gradient) nas bordas superior e inferior para não ficar um corte seco */
+  background: linear-gradient(to bottom, var(--bg-color) 0%, rgba(11, 17, 11, 0.7) 15%, rgba(11, 17, 11, 0.7) 85%, var(--bg-color) 100%);
 }
 
 /* CSS Pure 3D Coin Model - Fotorrealista Físico */
@@ -613,9 +627,10 @@ body {
    FOOTER (Ajustes para acomodar a estrela/terra)
    ========================================================== */
 .footer {
-  background: #060906;
-  padding: 3rem 5% 2rem; /* padding topo diminuído para não deixar vazio antes da terra */
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  /* Degradê para fundir suavemente a seção de cima (--bg-color) com a cor do rodapé (#060906) */
+  background: linear-gradient(to bottom, var(--bg-color) 0%, #060906 20%, #060906 100%);
+  padding: 3rem 5% 2rem;
+  border-top: none; /* Remove o corte seco da linha fina */
   position: relative;
   overflow: hidden;
 }
@@ -641,7 +656,9 @@ body {
 
 .footer-bottom {
   padding-top: 2rem;
-  border-top: 1px solid rgba(255,255,255,0.05);
+  /* Substitui a linha cortada por uma linha em degradê que some nas pontas */
+  border-top: 1px solid transparent;
+  border-image: linear-gradient(90deg, transparent, rgba(46, 204, 113, 0.4), transparent) 1;
   display: flex;
   justify-content: space-between;
   align-items: center;

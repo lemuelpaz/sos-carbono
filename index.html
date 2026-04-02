@@ -16,12 +16,19 @@
     <nav class="navbar">
       <div class="logo">SOSCARBONO<span>.</span></div>
 
+      <ul class="nav-links">
+        <li><a href="#home" data-i18n="footLink1">Home</a></li>
+        <li><a href="#sobre" data-i18n="footLink2">Empresa</a></li>
+        <li><a href="#servicos" data-i18n="footLink3">Serviços</a></li>
+      </ul>
+
       <div class="nav-actions">
-        <select id="langSwitcher" class="lang-select">
-          <option value="pt">PT</option>
-          <option value="en">EN</option>
-          <option value="es">ES</option>
-        </select>
+        <div class="lang-tabs" id="langSwitcher">
+          <div class="lang-tab active" data-lang="pt">PT</div>
+          <div class="lang-tab" data-lang="en">EN</div>
+          <div class="lang-tab" data-lang="es">ES</div>
+          <div class="lang-indicator"></div>
+        </div>
         <a href="#cooperado" class="btn btn-outline" data-i18n="navArea">Área do Cooperado</a>
       </div>
     </nav>
