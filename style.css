@@ -1,11 +1,11 @@
 :root {
-  --bg-color: #0b110b; /* Very dark green/black */
-  --text-primary: #f0f5f0;
-  --text-secondary: #a3b3a5;
+  --bg-color: #122018; /* Deep forest green (lighter than before) */
+  --text-primary: #eef5ee;
+  --text-secondary: #8db89a;
   --accent-green: #2ecc71;
   --accent-green-hover: #27ae60;
-  --glass-bg: rgba(20, 30, 20, 0.6);
-  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-bg: rgba(14, 38, 22, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.13);
   --font-main: 'Outfit', sans-serif;
 }
 
@@ -205,8 +205,8 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  /* Fades from semi-transparent to solid background color at the bottom */
-  background: linear-gradient(to bottom, rgba(11, 17, 11, 0.3) 0%, rgba(11, 17, 11, 0.8) 70%, var(--bg-color) 100%);
+  /* More transparent overlay so the forest image breathes */
+  background: linear-gradient(to bottom, rgba(10, 25, 15, 0.15) 0%, rgba(18, 32, 24, 0.65) 70%, var(--bg-color) 100%);
   z-index: 2;
 }
 
@@ -336,8 +336,8 @@ body {
   gap: 2.5rem;
 }
 .service-card {
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   padding: 3rem 2.5rem;
   border-radius: 20px;
   transition: all 0.4s ease;
@@ -345,9 +345,9 @@ body {
 }
 .service-card:hover {
   transform: translateY(-15px);
-  background: rgba(20, 30, 20, 0.8);
-  border-color: rgba(46, 204, 113, 0.3);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  background: rgba(25, 50, 35, 0.85);
+  border-color: rgba(46, 204, 113, 0.35);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 .icon-box {
   color: var(--accent-green);
@@ -387,8 +387,8 @@ body {
   content: "";
   position: absolute;
   inset: 0;
-  /* Degradê (gradient) nas bordas superior e inferior para não ficar um corte seco */
-  background: linear-gradient(to bottom, var(--bg-color) 0%, rgba(11, 17, 11, 0.7) 15%, rgba(11, 17, 11, 0.7) 85%, var(--bg-color) 100%);
+  /* Lighter overlay so the eco background is more visible */
+  background: linear-gradient(to bottom, var(--bg-color) 0%, rgba(18, 32, 24, 0.55) 15%, rgba(18, 32, 24, 0.55) 85%, var(--bg-color) 100%);
 }
 
 /* CSS Pure 3D Coin Model - Fotorrealista Físico */
@@ -557,7 +557,7 @@ body {
   margin-top: 2rem;
 }
 .time-box {
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.35);
   padding: 1.5rem;
   border-radius: 10px;
   min-width: 100px;
@@ -627,10 +627,10 @@ body {
    FOOTER (Ajustes para acomodar a estrela/terra)
    ========================================================== */
 .footer {
-  /* Degradê para fundir suavemente a seção de cima (--bg-color) com a cor do rodapé (#060906) */
-  background: linear-gradient(to bottom, var(--bg-color) 0%, #060906 20%, #060906 100%);
+  /* Gradient from forest green to a rich dark for the footer */
+  background: linear-gradient(to bottom, var(--bg-color) 0%, #0a1810 20%, #0a1810 100%);
   padding: 3rem 5% 2rem;
-  border-top: none; /* Remove o corte seco da linha fina */
+  border-top: none;
   position: relative;
   overflow: hidden;
 }
