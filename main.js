@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(section);
     });
 
-    // 4. Cadeias de Carbono (Canvas Particle System)
+    // 4. Folhas Flutuantes (Canvas Particle System)
     const canvas = document.getElementById("carbonCanvas");
     if(canvas) {
         const ctx = canvas.getContext("2d");
@@ -62,27 +62,41 @@ document.addEventListener("DOMContentLoaded", () => {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.3;
-                this.vy = (Math.random() - 0.5) * 0.3;
-                this.radius = Math.random() * 2 + 1;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5 + 0.3; // caindo suavemente
+                this.radius = Math.random() * 4 + 3;
+                this.angle = Math.random() * Math.PI * 2;
+                this.spin = (Math.random() - 0.5) * 0.02;
             }
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
+                this.angle += this.spin;
+                
+                // Movimento orgânico
+                this.x += Math.sin(this.y * 0.02) * 0.3;
+
+                if (this.x < -20) this.x = width + 20;
+                if (this.x > width + 20) this.x = -20;
+                if (this.y < -20) this.y = height + 20;
+                if (this.y > height + 20) this.y = -20;
             }
             draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                ctx.rotate(this.angle);
                 ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                // Desenhar forma de folha
+                ctx.moveTo(0, -this.radius);
+                ctx.quadraticCurveTo(this.radius, 0, 0, this.radius);
+                ctx.quadraticCurveTo(-this.radius, 0, 0, -this.radius);
                 ctx.fillStyle = "rgba(46, 204, 113, 0.4)"; 
                 ctx.fill();
+                ctx.restore();
             }
         }
 
-
-
-        for (let i = 0; i < 70; i++) {
+        for (let i = 0; i < 40; i++) {
             particles.push(new Particle());
         }
 
@@ -99,8 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
             lastScroll = current;
             particles.forEach(p => {
                  p.y -= dif * 0.3; // parallax do canvas
-                 if (p.y < -100) p.y = height + 50;
-                 if (p.y > height + 100) p.y = -50;
             });
         });
 
@@ -110,34 +122,18 @@ document.addEventListener("DOMContentLoaded", () => {
             particles.forEach(p => {
                 p.update();
                 p.draw();
-                // Repulsão pelo mouse
+                // Brisa ao passar o mouse
                 if (mouse.x != null) {
                     let dx = mouse.x - p.x;
                     let dy = mouse.y - p.y;
                     let dist = Math.sqrt(dx*dx + dy*dy);
-                    if (dist < 120) {
-                        p.x -= dx * 0.02;
-                        p.y -= dy * 0.02;
+                    if (dist < 150) {
+                        p.x -= dx * 0.015;
+                        p.y -= dy * 0.015;
+                        p.angle += 0.03;
                     }
                 }
             });
-
-            // Conectar cadeias 
-            for(let i = 0; i < particles.length; i++) {
-                for(let j = i + 1; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let dist = Math.sqrt(dx*dx + dy*dy);
-                    if (dist < 130) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(46, 204, 113, ${0.4 - dist/325})`; // Linhas mais sutis
-                        ctx.lineWidth = 1;
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
-                    }
-                }
-            }
 
             requestAnimationFrame(animate);
         }
