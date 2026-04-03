@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contato - SOS Carbono</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-color: #0a1810;
+      --accent-green: #2ecc71;
+      --text-primary: #eef5ee;
+      --glass-bg: rgba(255, 255, 255, 0.04);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .contact-container {
+      width: 100%;
+      max-width: 600px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      padding: 3rem;
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      animation: fadeIn 0.8s ease-out;
+    }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: translateY(0); } }
+    
+    h1 { font-size: 2.2rem; margin-bottom: 0.5rem; text-align: center; }
+    p { color: #8db89a; text-align: center; margin-bottom: 2.5rem; font-weight: 300; }
+    
+    .form-group { margin-bottom: 1.5rem; }
+    label { display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--accent-green); font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
+    
+    input, select, textarea {
+      width: 100%;
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--glass-border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--accent-green); box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.1); }
+    
+    .btn-submit {
+      width: 100%;
+      background: var(--accent-green);
+      color: #05140e;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+    .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(46, 204, 113, 0.4); filter: brightness(1.1); }
+    
+    .back-home { margin-top: 2rem; color: #8db89a; text-decoration: none; font-size: 0.9rem; transition: color 0.3s; }
+    .back-home:hover { color: var(--accent-green); }
+  </style>
+</head>
+<body>
+  <div class="contact-container">
+    <h1>Fale Conosco</h1>
+    <p>Preencha os dados abaixo e entraremos em contato com você o mais breve possível.</p>
+    
+    <form action="#">
+      <div class="form-group">
+        <label>Nome Completo</label>
+        <input type="text" placeholder="Ex: João da Silva" required>
+      </div>
+      
+      <div class="form-group">
+        <label>E-mail Corporativo</label>
+        <input type="email" placeholder="email@empresa.com" required>
+      </div>
+      
+      <div class="form-group">
+        <label>Tipo de Interesse</label>
+        <select required>
+          <option value="" disabled selected>Selecione um serviço</option>
+          <option value="compra">Compra de Créditos</option>
+          <option value="venda">Venda de Créditos</option>
+          <option value="arrendamento">Arrendamento de Terras</option>
+          <option value="esg">Consultoria ESG</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label>Mensagem</label>
+        <textarea rows="4" placeholder="Como podemos ajudar o seu projeto?"></textarea>
+      </div>
+      
+      <button type="submit" class="btn-submit">Enviar Mensagem</button>
+    </form>
+  </div>
+  
+  <a href="index.html" class="back-home">← Voltar para a Home</a>
+</body>
+</html>
